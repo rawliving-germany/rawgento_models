@@ -1,8 +1,6 @@
 # RawgentoModels
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rawgento_models`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Models to deal with Magento shop data of a specific shop instance.
 
 ## Installation
 
@@ -22,7 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Require this gem in your application.
+
+    # yourapp.gemspec
+    require 'rawgento_models'
+
+    $ bundle install
+
+    # Rakefile
+    RawgentoModels.include_tasks
+
+2. Setup your databse
+
+    # db/config.yml
+    host: ...
+
+    # TODO this does not yet work
+    rake db:migrate
+
+3. Use Models from your application
+
+    # yourapp.rb
+    require 'rawgento_models'
+    Stock.all
 
 ## Development
 
