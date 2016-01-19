@@ -25,6 +25,6 @@ class CreateBase < ActiveRecord::Migration
       p.datetime   "created_at", null: false
       p.datetime   "updated_at", null: false
     end
-    add_index :stock_items, :local_product_id, unique: true
+    add_index :stock_items, :local_product_id
   end
 end
