@@ -10,6 +10,10 @@ require 'yaml'
 require 'ostruct'
 
 module RawgentoModels
+  # When required, provide migrations.
+  MIGRATION_PATH = File.expand_path(File.join __dir__, '..', 'db', 'migrate')
+  ActiveRecordMigrations.configure {|c| c.migrations_paths = [MIGRATION_PATH] }
+
   # Reads config and wires up AR
   def self.establish_connection
     config = OpenStruct.new YAML.load_file("db/config.yml")
