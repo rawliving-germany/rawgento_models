@@ -28,7 +28,7 @@ Or install it yourself as:
     $ bundle install
 
     # Rakefile
-    RawgentoModels.include_tasks
+    RawgentoModels.load_tasks
 
 2. Setup your databse
 
