@@ -15,8 +15,8 @@ module RawgentoModels
   ActiveRecordMigrations.configure {|c| c.migrations_paths = [MIGRATION_PATH] }
 
   # Reads config and wires up AR
-  def self.establish_connection
-    config = OpenStruct.new YAML.load_file("db/config.yml")
+  def self.establish_connection(config_file_path="db/config.yml")
+    config = OpenStruct.new YAML.load_file(config_file_path)
     ActiveRecord::Base.establish_connection(config.default)
     #ActiveRecord::Base.establish_connection({
     #  :adapter => 'mysql2',

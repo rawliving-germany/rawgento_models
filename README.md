@@ -32,8 +32,10 @@ Or install it yourself as:
 
 2. Setup your databse
 
-    # db/config.yml
-    host: ...
+    # db/config.yml as in a vanilla rails
+      adapter: ...
+      host: ...
+      #...
 
     # TODO this does not yet work
     rake db:migrate
@@ -42,7 +44,14 @@ Or install it yourself as:
 
     # yourapp.rb
     require 'rawgento_models'
-    Stock.all
+
+    RawgentoModels.establish_connection
+    #RawgentoModels.establish_connection("alternative-config-file.yml")
+
+    RawgentoModels::LocalProducts.all
+    # or include the RawgentoModels module/namespace
+    include RawgentoModels
+    LocalProducts.all
 
 ## Development
 
