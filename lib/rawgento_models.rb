@@ -14,8 +14,10 @@ module RawgentoModels
   MIGRATION_PATH = File.expand_path(File.join __dir__, '..', 'db', 'migrate')
   ActiveRecordMigrations.configure {|c| c.migrations_paths = [MIGRATION_PATH] }
 
+  CONF_FILE = "db/config.yml"
+
   # Reads config and wires up AR
-  def self.establish_connection(config_file_path="db/config.yml")
+  def self.establish_connection(config_file_path=CONF_FILE)
     config = OpenStruct.new YAML.load_file(config_file_path)
     ActiveRecord::Base.establish_connection(config.default)
     #ActiveRecord::Base.establish_connection({
