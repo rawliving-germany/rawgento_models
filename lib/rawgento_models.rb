@@ -5,6 +5,8 @@ require "rawgento_models/version"
 require "rawgento_models/stock_item"
 require "rawgento_models/local_product"
 require "rawgento_models/remote_product"
+require "rawgento_models/order"
+require "rawgento_models/order_item"
 
 require 'yaml'
 require 'ostruct'
