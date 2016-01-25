@@ -1,5 +1,5 @@
 module RawgentoModels
-  class Order < ActiveRecord::Base
-    has_many: order_items
+  class OrderItem < ActiveRecord::Base
+    belongs_to :order
   end
 end
