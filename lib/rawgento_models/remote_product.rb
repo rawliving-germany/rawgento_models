@@ -2,6 +2,8 @@ module RawgentoModels
   class RemoteProduct < ActiveRecord::Base
     belongs_to :local_product
 
+    default_scope { order("name ASC") }
+
     scope :supplied_by, ->(supplier_name) { where(supplier: supplier_name) }
 
     def self.linked
