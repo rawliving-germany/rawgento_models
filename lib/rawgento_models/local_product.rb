@@ -2,6 +2,8 @@ module RawgentoModels
   class LocalProduct < ActiveRecord::Base
     has_one :remote_product
     has_many :stock_items
+    has_many :order_items
+    has_many :orders, through: :order_items
 
     default_scope { order("name ASC") }
 
