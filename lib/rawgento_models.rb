@@ -7,6 +7,7 @@ require "rawgento_models/local_product"
 require "rawgento_models/remote_product"
 require "rawgento_models/order"
 require "rawgento_models/order_item"
+require "rawgento_models/supplier"
 
 require 'yaml'
 require 'ostruct'

@@ -4,6 +4,7 @@ module RawgentoModels
     has_many :stock_items
     has_many :order_items
     has_many :orders, through: :order_items
+    belongs_to :supplier
 
     default_scope { order("name ASC") }
 
@@ -20,7 +21,7 @@ module RawgentoModels
             "  ON remote_products.local_product_id = local_products.id").where("remote_products.id IS null")
     }
     # City.includes(:photos).where(photos: { city_id: nil }) # slower
-    scope :supplied_by, ->(supplier_name) { where(supplier: supplier_name) }
+    scope :supplied_by, ->(supplier) { where(supplier: supplier) }
 
     def link_suggestions
       guesses = []
