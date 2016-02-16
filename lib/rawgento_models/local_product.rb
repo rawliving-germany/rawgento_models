@@ -28,7 +28,7 @@ module RawgentoModels
       guesses << RemoteProduct.supplied_by(self.supplier).where(name: self.name).to_a
       guesses << RemoteProduct.supplied_by(self.supplier).where("lower(name) like ?",
                                      "%#{self.name.downcase[0..self.name.size/2]}%").to_a
-      guesses.flatten
+      guesses.flatten.uniq
     end
   end
 end
