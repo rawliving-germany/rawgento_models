@@ -5,7 +5,9 @@ module RawgentoModels
 
     delegate :name, to: :local_product
 
-    scope :processible, -> { where("num_wished > 0") }
+    scope :processible, -> { where("num_wished  > 0") }
+    # Actually its more like 'has been put in cart'
+    scope :ordered,     -> { where("num_ordered > 0") }
 
     def remote_product_id
       local_product.remote_product.try(:product_id)
