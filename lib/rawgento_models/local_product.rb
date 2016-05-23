@@ -23,11 +23,12 @@ module RawgentoModels
     # City.includes(:photos).where(photos: { city_id: nil }) # slower
     scope :supplied_by, ->(supplier) { where(supplier: supplier) }
 
-    def link_suggestions
+    def link_suggestions limit=10
       guesses = []
       guesses << RemoteProduct.supplied_by(self.supplier).where(name: self.name).to_a
       guesses << RemoteProduct.supplied_by(self.supplier).where("lower(name) like ?",
-                                     "%#{self.name.downcase[0..self.name.size/2]}%").to_a
+                                                                "%#{self.name.downcase[0..self.name.size/2]}%")
+                 .limit(limit).to_a
       guesses.flatten.uniq
     end
   end
