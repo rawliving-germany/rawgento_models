@@ -6,7 +6,7 @@ module RawgentoModels
     has_many :orders, through: :order_items
     belongs_to :supplier
 
-    default_scope { order("name ASC") }
+    default_scope { where(active: true).order("name ASC") }
 
     scope :linked, -> {
       joins("LEFT OUTER JOIN " +
@@ -22,6 +22,10 @@ module RawgentoModels
     }
     # City.includes(:photos).where(photos: { city_id: nil }) # slower
     scope :supplied_by, ->(supplier) { where(supplier: supplier) }
+
+    def self.all_hidden
+      unscoped.where(active: false)
+    end
 
     def link_suggestions limit=10
       guesses = []
