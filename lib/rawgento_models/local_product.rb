@@ -2,7 +2,7 @@ module RawgentoModels
   class LocalProduct < ActiveRecord::Base
     has_one :remote_product
     has_many :stock_items
-    has_many :order_items
+    has_many :order_items, inverse_of: :local_product
     has_many :orders, through: :order_items
     belongs_to :supplier
 

@@ -1,7 +1,7 @@
 module RawgentoModels
   class OrderItem < ActiveRecord::Base
-    belongs_to :order
-    belongs_to :local_product
+    belongs_to :order, inverse_of: :order_items
+    belongs_to :local_product, inverse_of: :order_items
 
     delegate :name, to: :local_product
 
