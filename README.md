@@ -27,25 +27,30 @@ Or install it yourself as:
 
     $ bundle install
 
+2. Add the db-specific tasks to your Rakefile.
+
     # Rakefile
     RawgentoModels.load_tasks
 
-2. Setup your databse
+3. Configure your database
 
     # db/config.yml as in a vanilla rails
       adapter: ...
       host: ...
       #...
 
+4. Setup your database
+
     # TODO this does not yet work
     rake db:migrate
 
-3. Use Models from your application
+5. Use Models in your application
 
     # yourapp.rb
     require 'rawgento_models'
 
     RawgentoModels.establish_connection
+    # Or specify your configuration file
     #RawgentoModels.establish_connection("alternative-config-file.yml")
 
     RawgentoModels::LocalProducts.all
