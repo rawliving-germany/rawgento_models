@@ -20,5 +20,14 @@ module RawgentoModels
     def out_of_stock?
       num_ordered == 0
     end
+
+    def order_item_same_product before
+      time_range = Date.civil(1970, 1, 1)..before
+      OrderItem.where(local_product_id: self.local_product_id)
+        .joins(:order).where(
+          orders: { state: ['ordered', 'stocked'],
+                    updated_at: time_range })
+        .order("updated_at ASC")
+    end
   end
 end
