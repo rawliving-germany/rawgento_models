@@ -21,6 +21,14 @@ module RawgentoModels
       num_ordered == 0
     end
 
+    def ordered?
+      !not_ordered?
+    end
+
+    def not_ordered?
+      num_ordered.nil?
+    end
+
     def order_item_same_product before
       time_range = Date.civil(1970, 1, 1)..before
       OrderItem.where(local_product_id: self.local_product_id)

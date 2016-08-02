@@ -4,6 +4,7 @@ module RawgentoModels
     belongs_to :supplier
 
     scope :queued, -> { where(state: "queued") }
+    scope :in_state, ->(state) { where(state: state) }
 
     def self.current
       find_by(state: "new")
