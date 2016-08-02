@@ -11,28 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201601251100) do
+ActiveRecord::Schema.define(version: 201608011715) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
-    t.string   "supplier"
     t.integer  "product_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "shelve_nr"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "shelve_nr"
     t.integer  "packsize"
-    t.boolean  "active",     default: true
+    t.boolean  "active",             default: true
+    t.integer  "supplier_id"
+    t.string   "supplier_sku"
+    t.string   "supplier_prod_name"
+    t.decimal  "purchase_price"
+    t.text     "order_info"
   end
 
   add_index "local_products", ["product_id"], name: "index_local_products_on_product_id", unique: true
+  add_index "local_products", ["supplier_id"], name: "index_local_products_on_supplier_id"
 
   create_table "order_items", force: :cascade do |t|
-    t.integer  "order_id",         null: false
-    t.string   "state"
+    t.integer  "order_id",                         null: false
+    t.string   "state",            default: "new"
     t.integer  "num_wished"
     t.integer  "num_ordered"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "local_product_id"
     t.integer  "current_stock"
     t.integer  "min_stock"
@@ -41,21 +46,25 @@ ActiveRecord::Schema.define(version: 201601251100) do
   add_index "order_items", ["local_product_id"], name: "index_order_items_on_local_product_id"
 
   create_table "orders", force: :cascade do |t|
-    t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "state",       default: "new"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "supplier_id"
   end
+
+  add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id"
 
   create_table "remote_products", force: :cascade do |t|
     t.string   "name"
-    t.string   "supplier"
     t.integer  "local_product_id"
     t.integer  "product_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "supplier_id"
   end
 
   add_index "remote_products", ["local_product_id"], name: "index_remote_products_on_local_product_id"
+  add_index "remote_products", ["supplier_id"], name: "index_remote_products_on_supplier_id"
 
   create_table "stock_items", force: :cascade do |t|
     t.integer  "local_product_id"
@@ -66,5 +75,19 @@ ActiveRecord::Schema.define(version: 201601251100) do
   end
 
   add_index "stock_items", ["local_product_id"], name: "index_stock_items_on_local_product_id"
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "remote_shop",         default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email"
+    t.text     "order_template"
+    t.integer  "delivery_time_days"
+    t.text     "order_info"
+    t.decimal  "minimum_order_value"
+  end
+
+  add_index "suppliers", ["name"], name: "index_suppliers_on_name"
 
 end
