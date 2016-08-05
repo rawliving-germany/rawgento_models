@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201608011715) do
+ActiveRecord::Schema.define(version: 201608040700) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
@@ -46,10 +46,13 @@ ActiveRecord::Schema.define(version: 201608011715) do
   add_index "order_items", ["local_product_id"], name: "index_order_items_on_local_product_id"
 
   create_table "orders", force: :cascade do |t|
-    t.string   "state",       default: "new"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "state",            default: "new"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "supplier_id"
+    t.text     "internal_comment"
+    t.text     "public_comment"
+    t.text     "order_result"
   end
 
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id"
@@ -86,6 +89,7 @@ ActiveRecord::Schema.define(version: 201608011715) do
     t.integer  "delivery_time_days"
     t.text     "order_info"
     t.decimal  "minimum_order_value"
+    t.string   "order_method"
   end
 
   add_index "suppliers", ["name"], name: "index_suppliers_on_name"
