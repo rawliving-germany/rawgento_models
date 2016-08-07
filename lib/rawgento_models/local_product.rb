@@ -27,6 +27,14 @@ module RawgentoModels
       unscoped.where(active: false)
     end
 
+    def out_of_stock_days_since date
+      stock_items.where("qty <= ? AND date >= ?", 0, date).count
+    end
+
+    def first_stock_record
+      stock_items.order(created_at: :asc).first
+    end
+
     def link_suggestions limit=10
       guesses = []
       guesses << RemoteProduct.supplied_by(self.supplier).where(name: self.name).to_a

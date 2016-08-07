@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201608040700) do
+ActiveRecord::Schema.define(version: 201608051145) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 201608040700) do
     t.integer  "local_product_id"
     t.integer  "current_stock"
     t.integer  "min_stock"
+    t.integer  "num_stocked"
   end
 
   add_index "order_items", ["local_product_id"], name: "index_order_items_on_local_product_id"
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 201608040700) do
     t.text     "internal_comment"
     t.text     "public_comment"
     t.text     "order_result"
+    t.string   "remote_order_id"
   end
 
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id"
