@@ -6,7 +6,7 @@ module RawgentoModels
     has_many :orders, through: :order_items
     belongs_to :supplier
 
-    default_scope { where(active: true).order("name ASC") }
+    default_scope { where(active: true, hidden: false).order("name ASC") }
 
     scope :linked, -> {
       joins("LEFT OUTER JOIN " +
@@ -24,7 +24,7 @@ module RawgentoModels
     scope :supplied_by, ->(supplier) { where(supplier: supplier) }
 
     def self.all_hidden
-      unscoped.where(active: false)
+      unscoped.where("active = false OR hidden = true")
     end
 
     def out_of_stock_days_since date

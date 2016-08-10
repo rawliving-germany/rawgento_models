@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201608081515) do
+ActiveRecord::Schema.define(version: 201608102000) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 201608081515) do
     t.datetime "updated_at",                        null: false
     t.string   "shelve_nr"
     t.integer  "packsize"
-    t.boolean  "active",             default: true
+    t.boolean  "hidden",             default: true
     t.integer  "supplier_id"
     t.string   "supplier_sku"
     t.string   "supplier_prod_name"
     t.decimal  "purchase_price"
     t.text     "order_info"
+    t.boolean  "active"
   end
 
   add_index "local_products", ["product_id"], name: "index_local_products_on_product_id", unique: true
