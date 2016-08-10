@@ -24,7 +24,7 @@ module RawgentoModels
     scope :supplied_by, ->(supplier) { where(supplier: supplier) }
 
     def self.all_hidden
-      unscoped.where("active = false OR hidden = true")
+      unscoped.where("active = ? OR hidden = ?", false, true)
     end
 
     def out_of_stock_days_since date
