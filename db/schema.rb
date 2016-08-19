@@ -11,22 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201608102000) do
+ActiveRecord::Schema.define(version: 201608190700) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
     t.integer  "product_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "shelve_nr"
     t.integer  "packsize"
-    t.boolean  "hidden",             default: true
+    t.boolean  "hidden",             default: false, null: false
     t.integer  "supplier_id"
     t.string   "supplier_sku"
     t.string   "supplier_prod_name"
     t.decimal  "purchase_price"
     t.text     "order_info"
-    t.boolean  "active"
+    t.boolean  "active",             default: true,  null: false
   end
 
   add_index "local_products", ["product_id"], name: "index_local_products_on_product_id", unique: true
