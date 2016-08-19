@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 201608190700) do
   end
 
   add_index "order_items", ["local_product_id"], name: "index_order_items_on_local_product_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
 
   create_table "orders", force: :cascade do |t|
     t.string   "state",             default: "new"
