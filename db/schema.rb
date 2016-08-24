@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201608190700) do
+ActiveRecord::Schema.define(version: 2016023081730) do
 
   create_table "local_products", force: :cascade do |t|
     t.string   "name"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 201608190700) do
     t.string   "remote_order_id"
     t.string   "remote_order_link"
     t.string   "order_method"
+    t.datetime "ordered_at"
+    t.datetime "stocked_at"
   end
 
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id"

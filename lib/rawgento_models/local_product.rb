@@ -35,6 +35,14 @@ module RawgentoModels
       stock_items.order(created_at: :asc).first
     end
 
+    def days_since_first_stock
+      if first_record = first_stock_record
+        (Date.today - first_record.created_at.to_date)
+      else
+        0
+      end
+    end
+
     def link_suggestions limit=10
       guesses = []
       guesses << RemoteProduct.supplied_by(self.supplier).where(name: self.name).to_a
