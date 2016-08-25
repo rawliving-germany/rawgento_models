@@ -27,6 +27,11 @@ module RawgentoModels
       unscoped.where("active = ? OR hidden = ?", false, true)
     end
 
+    # SQLite specific
+    def self.name_ilike name
+      where('lower(name) LIKE ?', "%#{name.downcase}%")
+    end
+
     def out_of_stock_days_since date
       stock_items.where("qty <= ? AND date >= ?", 0, date).count
     end

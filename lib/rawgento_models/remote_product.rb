@@ -14,6 +14,11 @@ module RawgentoModels
     def self.unlinked
       self.where(local_product: nil)
     end
+
+    # SQLite specific
+    def self.name_ilike name
+      where('lower(name) LIKE ?', "%#{name.downcase}%")
+    end
   end
 end
 
