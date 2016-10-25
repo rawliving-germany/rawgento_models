@@ -42,5 +42,12 @@ module RawgentoModels
                     updated_at: time_range })
         .order("updated_at ASC")
     end
+
+    def order_item_same_product_last_wished
+      OrderItem.where(local_product_id: self.local_product_id).where('num_wished >= 0')
+        .joins(:order).where(
+          orders: { state: ['ordered', 'stocked']})
+        .order("updated_at DESC").first
+    end
   end
 end
