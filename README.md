@@ -68,6 +68,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Its easiest to copy an existing migration (from db/migrate), adjust the timestamp in the file name and replace the actual migration code.
 
+According to [](Active Record Migrations) you can also run `rake "db:new_migration[CreateUser, name birth:date]"` or `rake db:new_migration name=CreateUser options="name birth:date"`, you'll get help from `rake db:new_migration`.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rawgento_models. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
